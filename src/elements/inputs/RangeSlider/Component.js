@@ -6,7 +6,7 @@ const RangeSlider = ({ changeVal, value, min, max, step }) => {
   return (
     <div>
       <input
-        onChange={e => changeVal(e)}
+        onChange={e => changeVal(parseInt(e.target.value))}
         value={value}
         type="range"
         min={min}

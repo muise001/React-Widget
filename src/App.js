@@ -57,8 +57,6 @@ const App = () => {
     maxLoan
   } = generateWidgetData2(chosenGoal, chosenCompanyType, fakeDB);
 
-  const [chosenAmount, setAmount] = useState(maxLoan);
-  const [chosenPeriod, setPeriod] = useState(maxTime);
   const [popupIsOpen, popupSetOpen] = useState(false);
 
   const checkIfPopUpShouldBeOpenend = () => {
@@ -85,6 +83,12 @@ const App = () => {
     font-size: 4.7vh;
     text-align: center;
   `;
+
+  const [chosenAmount, setAmount] = useState(maxLoan);
+  const [chosenPeriod, setPeriod] = useState(maxTime);
+
+  chosenAmount > maxLoan && setAmount(maxLoan)
+  chosenPeriod > maxTime && setPeriod(maxTime)
 
   const interest = calculateInterest(chosenAmount, chosenPeriod, maxTime);
 

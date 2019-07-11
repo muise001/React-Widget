@@ -14,24 +14,18 @@ const Slider = ({
   setValue,
   step
 }) => {
-  const changeVal = ({ target: { value } }) => {
-    if (value > max) {
-      return;
-    }
-    setValue(value);
-  };
 
   return (
     <div className="sliderContainer">
       <label>{label}</label>
       <NumberInputWithPrefix
         value={value}
-        changeVal={changeVal}
+        changeVal={setValue}
         content={valutaIcon}
       />
       <RangeSlider
         value={value}
-        changeVal={changeVal}
+        changeVal={setValue}
         step={step}
         min={min}
         max={max}

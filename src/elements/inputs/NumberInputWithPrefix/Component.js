@@ -6,7 +6,7 @@ const NumberInputWithPrefix = ({ value, changeVal, content }) => {
   return (
     <div className="numberInputWithPrefix">
       {content && <p>{content}</p>}
-      <input type="number" value={value} onChange={e => changeVal(e)} />
+      <input type="number" value={value} onChange={e => changeVal(e.target.value)} />
     </div>
   );
 };

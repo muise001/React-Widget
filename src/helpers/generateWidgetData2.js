@@ -3,7 +3,12 @@ export const generateWidgetData2 = (chosenGoal, chosenCompanyType, data) => {
     return fillIn(
       data.filter(d => {
         const theseGoals = Object.keys(d.goals);
-        if (theseGoals.includes(chosenGoal)) return d;
+        if (theseGoals.includes(chosenGoal)) {
+          d.goals = {
+            [chosenGoal]: d.goals[chosenGoal]
+          };
+          return d;
+        }
       })
     );
   } else if (!chosenGoal && chosenCompanyType) {
@@ -11,7 +16,16 @@ export const generateWidgetData2 = (chosenGoal, chosenCompanyType, data) => {
   } else if (!chosenGoal && !chosenCompanyType) {
     return fillIn(data.filter(d => d));
   } else {
-    return fillIn(data.filter(d => d.companyType === chosenCompanyType));
+    return fillIn(
+      data.filter(d => {
+        if (d.companyType === chosenCompanyType) {
+          d.goals = {
+            [chosenGoal]: d.goals[chosenGoal]
+          };
+          return d;
+        }
+      })
+    );
   }
 };
 
