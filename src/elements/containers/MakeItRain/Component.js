@@ -26,7 +26,8 @@ const MakeItRain = ({ children, isOpen, setOpen }) => {
     const left = Math.floor(Math.random() * Math.floor(window.innerWidth));
     generatedMoney.push(
       <div
-        class="twirl"
+        key={i}
+        className="twirl"
         style={{
           animationDelay: `${ms}ms`,
           transform: "translateY(-10rem)",
