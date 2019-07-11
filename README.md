@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Interest and Loan Widget
 
-## Available Scripts
+With this widget it is possible to calculate interest based on the purpose of your loan, the type of business, the amount you want to borrow and the time you want to repay it.
 
-In the project directory, you can run:
+<img src="https://github.com/muise001/React-Widget/blob/master/widget.png" alt="First view of the widget"/>
 
-### `npm start`
+## Technical Challenges
+While creating this widget, I ran into a few technical difficulties. Below I explain what those difficulties were and how I solved them.
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+### Scalability
+To make this widget better than others, I wanted this widget to be very scalable. So if, for example, you add a dataset that is many times larger and contains other values, the widget still works well.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+A difficulty I encountered was that I had to take every possibility concerning the database into account. I started writing large functions for all these posibilities. This took alot of time and turned out not to be the most efficient nor reliable code. It worked kind of, but still didn't have all the features I had in mind for it. That's when I started with refactoring it. First I wrote down what it was that I realy wanted. First I started to think about what I really wanted with that function. First I started writing down all the functionalities it should have. After that I started looking up [videos](https://www.youtube.com/watch?v=rRgD1yVwIvE&t=642s) about `.forEach, .map, .filter, .reduce` to refresh my memory. After this I was able to rewrite my code well. Unfortunately, it is still not the most efficient code, but it is almost 20 percent shorter, so more efficient.
 
-### `npm test`
+### Feedback
+After I refactored the code (I was talking about above), was it that if you had entered one of the two dropdowns (selects), the second one automatically gave the options that were associated with the previously entered dropdown. The only flaw in my design was that once you choose your value in a dropdown, you were never available to undo it. That's when I added "remove-icons" on the side of the dropdown. 
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+<img src="https://github.com/muise001/React-Widget/blob/master/optionality%20to%20delete.png" alt="Remove value button"/>
 
-### `npm run build`
+Another flaw was that if you wanted to calculate your loan, you could do that even tough you didn't even enter the type of business or goal. That's why I also added a little feedback-popup under the call-to-action button.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+<img src="https://github.com/muise001/React-Widget/blob/master/feedback.png" alt="Feedback to premature call-to-action"/>
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+### Fun
+What says more about "money" than money? 
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+To add something fun into the widget, I created an animation in the background of the "result-popup". In this pop-up you read how much interest you have to pay over how many months. See the preview below!
 
-### `npm run eject`
+<img src="https://github.com/muise001/React-Widget/blob/master/makeItRain.gif" alt="Fun feedback"/>
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
