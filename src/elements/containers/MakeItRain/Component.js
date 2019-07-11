@@ -3,7 +3,6 @@ import styled from "styled-components";
 import "./style.css";
 
 const MakeItRain = ({ children, isOpen, setOpen }) => {
-  console.log(isOpen);
   const BlurredBackground = styled.div`
     opacity: 0;
     pointer-events: none;
