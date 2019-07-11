@@ -1,44 +1,61 @@
-import React, {useState} from 'react';
+import React from "react";
 import PropTypes from "prop-types";
-import styled from 'styled-components';
-import NumberInputWithPrefix from "../inputs/NumberInputWithPrefix"
-import RangeSlider from "../inputs/RangeSlider"
+import NumberInputWithPrefix from "../inputs/NumberInputWithPrefix";
+import RangeSlider from "../inputs/RangeSlider";
+import "./style.css";
 
-const Dropdown = ({label, min, max, withDropdown, valutaIcon}) => {
-  const [value, setValue] = useState(max)
-
-const changeVal = ({target: {value}}) => {
-  if (value > max){
-    return
-  }
-  setValue(value)
-}
-
-// const RangeSlider = styled.input`
-//  width: 100%;
-// }`
-
-// const SliderContainer = styled.div`
-//   display: flex;
-//   flex-wrap: wrap;
-//   justify-content: space-between;
-// `
+const Slider = ({
+  label,
+  min,
+  max,
+  withDropdown,
+  valutaIcon,
+  value,
+  setValue,
+  step
+}) => {
+  const changeVal = ({ target: { value } }) => {
+    if (value > max) {
+      return;
+    }
+    setValue(value);
+  };
 
   return (
     <div className="sliderContainer">
       <label>{label}</label>
-        <NumberInputWithPrefix value={value} changeVal={changeVal} content={valutaIcon}/>
-        <RangeSlider value={value} changeVal={changeVal} min={min} max={max}/>
+      <NumberInputWithPrefix
+        value={value}
+        changeVal={changeVal}
+        content={valutaIcon}
+      />
+      <RangeSlider
+        value={value}
+        changeVal={changeVal}
+        step={step}
+        min={min}
+        max={max}
+      />
     </div>
   );
-}
-
-Dropdown.propTypes = {
-  label: PropTypes.string,
-
 };
 
-export default Dropdown;
+Slider.defaultProps = {
+  min: 0
+};
+
+Slider.propTypes = {
+  label: PropTypes.string.isRequired,
+  min: PropTypes.number.isRequired,
+  max: PropTypes.number.isRequired,
+  withDropdown: PropTypes.bool,
+  valutaIcon: PropTypes.string,
+  value: PropTypes.number.isRequired,
+  setValue: PropTypes.func,
+  step: PropTypes.number
+};
+
+export default Slider;
 
 // -=========- DESCRIPTION -=========- //
 // line 15. I tried changing the range slider to a styled component, but it worked very

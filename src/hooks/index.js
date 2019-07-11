@@ -1,1 +1,1 @@
-export { useCloseOnOutsideClick } from "./useCloseOnOutsideClick"
+export { useCloseOnOutsideClick } from "./useCloseOnOutsideClick";

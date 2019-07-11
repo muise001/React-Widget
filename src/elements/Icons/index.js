@@ -1,1 +1,1 @@
-export { DropdownArrow } from "./DropdownArrow"
+export { DropdownArrow } from "./DropdownArrow";

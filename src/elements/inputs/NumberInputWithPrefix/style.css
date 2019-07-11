@@ -1,0 +1,23 @@
+
+.numberInputWithPrefix {
+  position: relative;
+}
+
+.numberInputWithPrefix p {
+  margin: 0;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+  margin-left: 5px;
+}
+
+input[type=number] {
+  border-radius: 4px;
+  border: 2px solid #9e9eef;
+  padding: 10px 0;
+  cursor: pointer;
+  text-align: end;
+  font-size: 16px;
+}

@@ -8,14 +8,15 @@ export const useCloseOnOutsideClick = (id, fn) => {
     });
 
     return () => {
-      document.getElementById(id).removeEventListener("click", document.getElementById(id));
+      document
+        .getElementById(id)
+        .removeEventListener("click", document.getElementById(id));
     };
   }, [fn, id]);
 
   return null;
 };
 
-
 // Source
-  //  idea : Some guy on the internet... forgot to copy-paste the link.
-  //  Bug fix: https://github.com/angular/zone.js/issues/847
+//  idea : Some guy on the internet... forgot to copy-paste the link.
+//  Bug fix: https://github.com/angular/zone.js/issues/847

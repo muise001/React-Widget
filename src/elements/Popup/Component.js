@@ -1,36 +1,39 @@
-import React, { useState } from "react"
-import styled from "styled-components"
+import React from "react";
+import styled from "styled-components";
+import PropTypes from "prop-types";
+import MakeItRain from "../containers/MakeItRain";
 
-const Popup = ({children, isOpen, setOpen}) => {
-  console.log(isOpen);
-  const BlurredBackground = styled.div`
-    opacity: 0;
-    pointer-events: none;
-    &.open {
-      pointer-events: all;
-      opacity: 1;
-      position: absolute;
-      background: rgba(119, 158, 180, 0.73);
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-    }
-  `
-
+const Popup = ({ children, isOpen, setOpen }) => {
   const PopupContainer = styled.div`
-    width: 10%;
-    height: 10%;
-    background: blue;
-  `
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 50vh;
+    height: 50vh;
+    padding: 1rem 1.5rem 2.5rem;
+    background: white;
+    margin: -25vh;
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    z-index: 1;
+    a {
+      text-align: center;
+    }
+  `;
 
   return (
-    <BlurredBackground className={isOpen && "open"} onClick={() => {setOpen(false)}}>
-      <PopupContainer>
-        {children}
-      </PopupContainer>
-    </BlurredBackground>
-  )
-}
+    <MakeItRain isOpen={isOpen} setOpen={setOpen}>
+      <PopupContainer>{children}</PopupContainer>
+    </MakeItRain>
+  );
+};
 
-export default Popup
+Popup.propTypes = {
+  children: PropTypes.node.isRequired,
+  isOpen: PropTypes.bool.isRequired,
+  setOpen: PropTypes.func.isRequired
+};
+
+export default Popup;

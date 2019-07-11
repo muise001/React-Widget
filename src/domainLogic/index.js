@@ -1,0 +1,1 @@
+export { calculateInterest } from "./calculateInterest";

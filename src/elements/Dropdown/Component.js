@@ -1,32 +1,52 @@
-import React, { useState } from 'react';
-import PropTypes from "prop-types"
+import React, { useState } from "react";
+import PropTypes from "prop-types";
 import { useCloseOnOutsideClick } from "../../hooks";
-import { DropdownArrow } from "../Icons"
+import { DropdownArrow } from "../Icons";
+import "./style.css";
 
-const Dropdown = ({label, options, placeholder, setValue, value}) => {
+const Dropdown = ({ label, options, placeholder, setValue, value }) => {
   const [open, setOpen] = useState(false);
 
-  let dropdownOptions = options.map(option => (
-    <p onClick={() => {setValue(option)}}>{option}</p>
-  ))
+  const dropdownOptions = options.map((option, i) => (
+    <p
+      key={i}
+      onClick={() => {
+        setValue(option);
+      }}
+    >
+      {option}
+    </p>
+  ));
 
-  useCloseOnOutsideClick(label, setOpen)
+  useCloseOnOutsideClick(label, setOpen);
 
   return (
     <div className="dropdown">
-      <label>{label}</label>
-      <div id={label} onClick={() => {setOpen(!open)}}>
-        <div className={`dropdownLabel ${open && "open"} ${value && "checked"}`}>
+      <label>
+        {label}
+        {value && (
+          <p className="remove" onClick={() => setValue("")}>
+            x
+          </p>
+        )}
+      </label>
+      <div
+        id={label}
+        onClick={() => {
+          setOpen(!open);
+        }}
+      >
+        <div
+          className={`dropdownLabel ${open && "open"} ${value && "checked"}`}
+        >
           <p>{value ? value : placeholder}</p>
           <DropdownArrow />
         </div>
-         <div className={`optionsContainer`}>
-          {dropdownOptions}
-        </div>
+        <div className={`optionsContainer`}>{dropdownOptions}</div>
       </div>
     </div>
   );
-}
+};
 
 Dropdown.propTypes = {
   label: PropTypes.string,

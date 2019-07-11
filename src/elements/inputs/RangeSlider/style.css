@@ -1,0 +1,40 @@
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  background: transparent;
+  margin: 0;
+  height: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  border-radius: 50%
+}
+
+input[type=range]:focus {
+  outline: none;
+}
+
+.sliderContainer > div:last-of-type {
+  background: lightgray;
+  overflow: hidden;
+  height: 16px;
+  border-radius: 50px;
+  border: 1px solid lightgray;
+  margin-top: 1rem;
+  width: 100%;
+}
+
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: -3008px 0 0 3000px #9e9eef;
+  -webkit-appearance: none;
+/*   border: 2px s; */
+  height: 14px;
+  width: 14px;
+/*   border-radius: 50%; */
+  background: #ffffff;
+  cursor: pointer;
+  margin-bottom: 4px;
+/*   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;  */
+}

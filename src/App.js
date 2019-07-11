@@ -1,25 +1,30 @@
-import React, { useState, createContext } from 'react';
-import styled from 'styled-components';
+import React, { useState } from "react";
+import styled from "styled-components";
 import Dropdown from "./elements/Dropdown";
 import Slider from "./elements/Slider";
 import Link from "./elements/Link";
-import Popup from "./elements/Popup"
-import { generateWidgetData, calculateInterest } from "./helpers";
-import './app.css';
+import Popup from "./elements/Popup";
+import { generateWidgetData2, roundUpToTwoDecimals } from "./helpers";
+import { calculateInterest } from "./domainLogic";
+import "./app.css";
 
 const App = () => {
-
-  const [chosenCompanyType, setcompanyType] = useState("")
-  const [chosenGoal, setGoal] = useState("")
+  const [chosenCompanyType, setcompanyType] = useState("");
+  const [chosenGoal, setGoal] = useState("");
 
   const fakeDB = [
     {
       companyType: "BV",
-      goals : {
+      goals: {
         Marketing: {
           minLoan: 5000,
           maxLoan: 250000,
           maxTimeInMonths: 36
+        },
+        Machines: {
+          minLoan: 5000,
+          maxLoan: 1000000,
+          maxTimeInMonths: 60
         },
         Equipment: {
           minLoan: 5000,
@@ -29,8 +34,8 @@ const App = () => {
       }
     },
     {
-      companyType : "Eenmanszaak",
-      goals : {
+      companyType: "Eenmanszaak",
+      goals: {
         Marketing: {
           minLoan: 5000,
           maxLoan: 250000,
@@ -43,55 +48,57 @@ const App = () => {
         }
       }
     }
-  ]
-  const { goalOptions, companyTypeOptions, maxTime, maxLoan } = generateWidgetData(chosenGoal, chosenCompanyType, fakeDB)
+  ];
 
-  const [chosenAmount, setAmount] = useState(maxLoan)
-  const [chosenPeriod, setPeriod] = useState(maxTime)
-  const [popupIsOpen, popupSetOpen] = useState(false)
+  const {
+    goalOptions,
+    companyTypeOptions,
+    maxTime,
+    maxLoan
+  } = generateWidgetData2(chosenGoal, chosenCompanyType, fakeDB);
 
-  console.log(popupIsOpen);
+  const [chosenAmount, setAmount] = useState(maxLoan);
+  const [chosenPeriod, setPeriod] = useState(maxTime);
+  const [popupIsOpen, popupSetOpen] = useState(false);
 
-  const WidgetWrapper = styled.div`
-  width: 80vh;
-  height: 80vh;
-  padding: 4vh;
-  position: fixed;
-  background: white;
-  border-radius: 20px;
-  left: 50%;
-  top: 50%;
-  margin: -40vh;
-  box-shadow: 0px 11px 73px -12px #a0a0a0;;
-  `
+  const checkIfPopUpShouldBeOpenend = () => {
+    if (chosenGoal && chosenCompanyType) {
+      popupSetOpen(true);
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const Grid = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 1rem;
-  &.footer {
-    position: relative;
-    margin-bottom: 0;
-    align-items: center;
-  }
-  `
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+    &.footer {
+      position: relative;
+      margin-bottom: 0;
+      align-items: center;
+    }
+  `;
 
   const Title = styled.h1`
-  font-size: 4.7vh;
-  text-align: center;
-  `
+    font-size: 4.7vh;
+    text-align: center;
+  `;
 
-  const interest = calculateInterest(chosenAmount, chosenPeriod, maxTime)
+  const interest = calculateInterest(chosenAmount, chosenPeriod, maxTime);
 
   const successMessage = `
   Gefeliciteerd! Je kan ${chosenAmount} euro lenen. Hier zijn echter wel rente aan
   verbonden. De berekende rente voor jou zijn ${interest}%. Dat betekent dat je na
-  ${chosenPeriod} maanden ${chosenAmount * (interest / 100 + 1)} terugbetaald!
-  `
+  ${chosenPeriod} maanden ${roundUpToTwoDecimals(
+    chosenAmount * (interest / 100 + 1)
+  )} terugbetaald!
+  `;
 
   return (
     <>
-      <WidgetWrapper>
+      <div className="widgetWrapper">
         <Title>Stel je zakelijke financiering samen</Title>
         <Grid>
           <Dropdown
@@ -100,14 +107,14 @@ const App = () => {
             placeholder="kies een doel"
             setValue={setGoal}
             value={chosenGoal}
-            />
+          />
           <Dropdown
             label="Bedrijfsvorm"
             options={companyTypeOptions}
             placeholder="kies een vorm"
             setValue={setcompanyType}
             value={chosenCompanyType}
-            />
+          />
         </Grid>
         <Slider
           label="Financiering"
@@ -115,6 +122,7 @@ const App = () => {
           max={maxLoan}
           valutaIcon="€"
           setValue={setAmount}
+          step={1000}
           value={chosenAmount}
         />
         <Slider
@@ -122,20 +130,26 @@ const App = () => {
           min={3}
           max={maxTime}
           setValue={setPeriod}
+          step={3}
           value={chosenPeriod}
         />
         <Grid className="footer">
-          <Link label="Check of je in aanmerking komt" link="#"/>
-          <Link label="Direct aan de slag" link="#" primaryButton setOpen={popupSetOpen}/>
+          <Link label="Check of je in aanmerking komt" link="#" />
+          <Link
+            label="Direct aan de slag"
+            link="#"
+            primaryButton
+            setOpen={checkIfPopUpShouldBeOpenend}
+          />
         </Grid>
-      </WidgetWrapper>
+      </div>
       <Popup isOpen={popupIsOpen} setOpen={popupSetOpen}>
         <h1> Je maakt kans op een lening </h1>
         <p>{successMessage}</p>
-        <Link label="Chill!!!" link="#" primaryButton setOpen={popupSetOpen}/>
+        <Link label="Chill!!!" link="#" primaryButton setOpen={popupSetOpen} />
       </Popup>
     </>
   );
-}
+};
 
 export default App;
