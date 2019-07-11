@@ -33,7 +33,7 @@ const MakeItRain = ({ children, isOpen, setOpen }) => {
           left: left - 100
         }}
       >
-        <div class="bill">10</div>
+        <div className="bill">10</div>
       </div>
     );
   }
